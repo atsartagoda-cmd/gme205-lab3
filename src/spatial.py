@@ -68,9 +68,28 @@ class Point:
             tag=row.get("tag"),
         )
 
+    @classmethod
+    def from_dict(cls, d: dict):
+        return cls(
+            id=str(d["id"]),
+            lon=float(d["lon"]),
+            lat=float(d["lat"]),
+            name=d.get("name"),
+            tag=d.get("tag"),
+        )
+
+    def as_dict(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "tag": self.tag,
+            "geometry": [self.lon, self.lat],
+            "bbox": list(self.geometry.bounds),
+        }
+
     # ------------------------------------------------------------------
     # Semantic method (meaning of the object)
     # ------------------------------------------------------------------
-    
+
     def is_poi(self):
         return (self.tag or "").lower() == "poi"
