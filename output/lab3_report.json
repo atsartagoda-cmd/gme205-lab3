@@ -1,0 +1,35 @@
+{
+  "point": {
+    "id": "A",
+    "name": "Gate",
+    "tag": "POI",
+    "geometry": [
+      121.0,
+      14.6
+    ],
+    "bbox": [
+      121.0,
+      14.6,
+      121.0,
+      14.6
+    ]
+  },
+  "parcel": {
+    "parcel_id": 101,
+    "bbox": [
+      0.0,
+      0.0,
+      10.0,
+      5.0
+    ],
+    "attributes": {
+      "area": 50.0,
+      "zone": "Residential",
+      "is_active": true
+    }
+  },
+  "relationships": {
+    "inside_intersects_parcel": true,
+    "outside_intersects_parcel": false
+  }
+}
