@@ -67,3 +67,37 @@ def test_from_dict_invalid():
 
     with pytest.raises(ValueError):
         Point.from_dict(record)
+
+def test_point_bbox():
+    point = Point("A", 121.0, 14.6)
+    assert point.bbox() == (121.0, 14.6, 121.0, 14.6)
+
+def test_parcel_bbox():
+    geometry = Polygon([
+        (0, 0),
+        (10, 0),
+        (10, 5),
+        (0, 5)
+    ])
+    parcel = Parcel(101, geometry, {"zone": "Residential"})
+
+    assert parcel.bbox() == (0.0, 0.0, 10.0, 5.0)
+
+def test_as_dict_contains_no_shapely_objects():
+    point = Point("A", 121.0, 14.6, name="Gate", tag="POI")
+    point_result = point.as_dict()
+
+    assert isinstance(point_result["geometry"], list)
+    assert point_result["geometry"] == [121.0, 14.6]
+
+    geometry = Polygon([
+        (0, 0),
+        (10, 0),
+        (10, 5),
+        (0, 5)
+    ])
+    parcel = Parcel(101, geometry, {"zone": "Residential"})
+    parcel_result = parcel.as_dict()
+
+    assert isinstance(parcel_result["bbox"], list)
+    assert parcel_result["bbox"] == [0.0, 0.0, 10.0, 5.0]
