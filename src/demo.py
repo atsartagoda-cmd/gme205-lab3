@@ -25,3 +25,9 @@ print(q.id)
 print(q.lon, q.lat)
 print(q.name)
 print(q.is_poi())
+print()
+print("Inherited bbox:", p.bbox())
+
+r = Point("C", 121.1, 14.7)
+
+print("Intersects different location:", p.intersects(r))
